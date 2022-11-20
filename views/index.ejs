@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+  <%- include('partials/homenavbar') %>
+
+    <body>
+      <div class="container">
+
+        <div class="row">
+          <% articles.forEach(article=> { %>
+            <div class="col-6 col-sm-4">
+              <div class="card-title">
+                <%- article.title  %> 
+              </div>
+              <div class="card" style="overflow: hidden;">
+                <%- article.body %>
+              </div>
+            </div>
+            <% })%>
+        </div>
+      </div>
+    </body>
+    <%- include('partials/footer') %>

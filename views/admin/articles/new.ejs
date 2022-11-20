@@ -1,0 +1,59 @@
+<%- include ('../partials/header')%>
+<%- include ('../partials/navbar.ejs')%>
+
+<div class="container">
+    <hr>
+    <div class="card">
+    <div class="card-header">
+        <h2>Novo Artigo</h2>
+    </div> 
+    <div class="card-body">
+    <form method="post" action="/articles/save">    
+        <input class="form-control" type="text" name="title" placeholder="Defina o tituto do Artigo"><br>
+        <textarea name="body" id="article" class="form-control" placeholder="Escreva o artigo aqui"></textarea><br>
+        <div>
+            <label for="imagem" class="form-label">Escolha o arquivo de imagem</label>
+            <input class="form-control form-control-lg" id="imagem" type="file">
+          </div>
+        
+        <label> Categoria </label>
+        <select name="category" class="form-control">
+           <% categories.forEach(category => {  %> 
+            <option value="<%=category.id %>"><%=category.title %></option>
+        
+            <% }) %> 
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+</div>
+</div>
+</div>
+
+<%- include ('../partials/footer.ejs')%>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+
+    tinymce.init({
+        selector: '#article',
+        language: 'pt_BR',
+        branding: false,
+        plugins: [
+        'advlist',
+                    'autolink',
+                    'link',
+                    'image',
+                    'lists',
+                    'preview',
+                    'searchreplace',
+                    'wordcount',
+                    'fullscreen',
+                    'insertdatetime',
+                    'media',
+                    'save',
+                    'table',
+                    'emoticons'
+        ]
+    })
+
+</script>

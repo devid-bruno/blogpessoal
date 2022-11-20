@@ -1,0 +1,52 @@
+<%- include ('../partials/header')%>
+<%- include ('../partials/navbar.ejs')%>
+
+<div class="container">
+    <hr>
+    <div class="card">
+    <div class="card-header">
+        <h2>Editar Artigo</h2>
+    </div> 
+    <div class="card-body">
+    <form method="post" action="/articles/update">
+        <input type="hidden" value="<%= article.id %>" name="id">
+        <input class="form-control" type="text" name="title" placeholder="Defina o tituto do Artigo"><br>
+        <textarea name="body" id="articles" class="form-control" placeholder="Escreva o artigo aqui"></textarea><br>
+        <label> Categoria </label>
+        <select name="category" class="form-control">
+           <% categories.forEach(category => {  %> 
+            <% if(category.id == article.categoryId){ %>
+                <option value="<%=category.id%>" <%= category.id === article.categoryId ? "selected" : '' %>><%= category.title %></option>
+         <% } else{ %>
+            <option value="<%=category.id %>"><%=category.title %></option>
+         <% } %>
+            <% }) %> 
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+</div>
+</div>
+</div>
+
+<div id="content" style="display: none;">
+    <%- article.body %>
+</div>
+
+<%- include ('../partials/footer.ejs')%>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+
+    tinymce.init({
+        selector: '#articles',
+        language: 'pt_BR',
+        branding: false,
+        plugins: [
+        'advlist', 'autolink', 'link', 'image', 'lists', 'preview', 'searchreplace', 'wordcount', 'fullscreen', 'insertdatetime', 'media', 'save', 'table', 'emoticons'
+        ],
+        init_instance_callback: () => {
+            tinymce.activeEditor.setContent(document.getElementById('content').innerHTML);
+        }
+    })
+
+</script>
